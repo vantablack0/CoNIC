@@ -204,7 +204,18 @@ np.save(f'{OUT_DIR}/valid_true.npy', valid_labels)
 
 from net_desc import HoVerNetConic
 whole_dict = torch.load(PRETRAINED)
+
 pretrained = whole_dict['desc']
+def change_key(self, old, new):
+    for _ in range(len(self)):
+        k, v = self.popitem(False)
+        self[new if old == k else k] = v
+
+pre_keys = pretrained.keys()
+for key in pre_keys:
+    new_key = key[len('module.'):]
+    change_key(pretrained,key,new_key)
+    
 #pretrained = torch.load(PRETRAINED)
 model = HoVerNetConic(num_types=NUM_TYPES)
 model.load_state_dict(pretrained)
