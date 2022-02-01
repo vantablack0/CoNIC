@@ -211,7 +211,7 @@ def change_key(self, old, new):
         k, v = self.popitem(False)
         self[new if old == k else k] = v
 
-pre_keys = pretrained.keys()
+pre_keys = list(pretrained.keys())
 for key in pre_keys:
     new_key = key[len('module.'):]
     change_key(pretrained,key,new_key)
