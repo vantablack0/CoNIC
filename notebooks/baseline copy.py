@@ -203,8 +203,9 @@ np.save(f'{OUT_DIR}/valid_true.npy', valid_labels)
 
 
 from net_desc import HoVerNetConic
-
-pretrained = torch.load(PRETRAINED)
+whole_dict = torch.load(PRETRAINED)
+pretrained = whole_dict['desc']
+#pretrained = torch.load(PRETRAINED)
 model = HoVerNetConic(num_types=NUM_TYPES)
 model.load_state_dict(pretrained)
 
